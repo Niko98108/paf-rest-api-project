@@ -5,9 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import org.json.JSONObject;
+
+
 
 
 public class Project {
+	
+
 	
 	public Connection getconnection() {
 		
@@ -205,12 +210,69 @@ public class Project {
 	 }
 	catch (Exception e)
 	 {
-	 output = "Error while reading the items.";
+	 output = "Error while reading the Project.";
 	 System.err.println(e.getMessage());
 	 e.printStackTrace();
 	 }
 	return output;
 	}
+	
+	
+	
+	public String projectSearch(int id)
+	{
+	 String output = "";
+	try
+	 {
+	 Connection con = getconnection();
+	 if (con == null)
+	 {
+	 return "Error while connecting to the Database.";
+	 }
+
+	 
+	 String query = "SELECT * FROM project WHERE project_id= '"+id+"'";
+	 
+	 Statement stmt = con.createStatement();
+	 ResultSet rs = stmt.executeQuery(query);
+	 
+	 // iterate through the rows in the result set
+	 while (rs.next())
+	 {
+	 String projectId = Integer.toString(rs.getInt("project_id"));
+	 String projectName = rs.getString("projectName");
+	 String projectDesc = rs.getString("projectDesc");
+	 String projectType = rs.getString("projectType") ;
+	 String managerId = rs.getString("manager_id");
+	 String startDate = rs.getString("startDate");
+	 String endDate = rs.getString("endDate");
+	 
+	 JSONObject obj = new JSONObject();
+
+     obj.put("projectId", projectId);
+     obj.put("projectName",projectName );
+     obj.put("projectDesc",projectDesc );
+     obj.put("projectType",projectType );
+     obj.put("managerId",managerId );
+     obj.put("startDate",startDate);
+     obj.put("endDate", endDate);
+	 
+	 output = " '"+obj+"' ";
+
+	 }
+	 con.close();
+
+	 }
+	catch (Exception e)
+	 {
+	 output = "Error while reading the Project.";
+	 System.err.println(e.getMessage());
+	 e.printStackTrace();
+	 }
+	return output;
+	}
+
+
 
 
 }

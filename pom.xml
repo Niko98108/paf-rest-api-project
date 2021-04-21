@@ -60,5 +60,15 @@
  <artifactId>jsoup</artifactId>
  <version>1.8.1</version>
  </dependency>
+ <dependency>
+<groupId>javax.activation</groupId>
+<artifactId>activation</artifactId>
+<version>1.1.1</version>
+ </dependency>
+  <dependency>
+<groupId> org.apache.tomcat</groupId>
+<artifactId>catalina</artifactId>
+<version>6.0.53</version>
+ </dependency>
 </dependencies>
 </project>

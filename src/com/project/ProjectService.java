@@ -1,6 +1,8 @@
 package com.project;
 import model.Project;
 
+
+
 //for Rest Services
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -93,6 +95,16 @@ public class ProjectService {
 		public String readItems() {
 
 			return projectObj.readProject();
+		}
+		
+		//return JSON Object
+		@GET
+		@Path("/search/{id}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public String getDetails(@PathParam("id") int id){
+			
+			 return projectObj.projectSearch(id) ;
+			
 		}
 	
 		}
