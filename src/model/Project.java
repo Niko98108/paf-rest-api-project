@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 public class Project {
@@ -133,6 +135,77 @@ public class Project {
 	catch (Exception e)
 	 {
 	 output = "Error while Deleting";
+	 System.err.println(e.getMessage());
+	 e.printStackTrace();
+	 }
+	return output;
+	}
+	
+	//Read Project Data
+	public String readProject()
+	{
+	 String output = "";
+	try
+	 {
+	 Connection con = getconnection();
+	 if (con == null)
+	 {
+	 return "Error while connecting to the Database.";
+	 }
+	 // Prepare the HTML table to be displayed
+	 
+//	 output = "<table border='1'><tr><th>Item Code</th>"
+//	 +"<th>Item Name</th><th>Item Price</th>"
+//	 + "<th>Item Description</th>"
+//	 + "<th>Update</th><th>Remove</th></tr>";
+	 
+	 output = "<table style=\"border-collapse: collapse;border: 1px solid black\">\r\n"
+	 		+ "  <thead>\r\n"
+	 		+ "    <tr style=\"border: 1px solid black;background-color: lightgray\">\r\n"
+	 		+ "      <th style=\"border: 1px solid black\" scope=\"col\">Project ID</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Name</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Descripton</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Type</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Manager ID</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Start Data</th>\r\n"
+	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">End Data</th>\r\n"
+	 		+ "    </tr>\r\n"
+	 		+ "  </thead>\r\n"
+	 		+ "</table";
+	 
+	 String query = "SELECT * FROM project";
+	 
+	 Statement stmt = con.createStatement();
+	 ResultSet rs = stmt.executeQuery(query);
+	 
+	 // iterate through the rows in the result set
+	 while (rs.next())
+	 {
+	 String projectId = Integer.toString(rs.getInt("project_id"));
+	 String projectName = rs.getString("projectName");
+	 String projectDesc = rs.getString("projectDesc");
+	 String projectType = rs.getString("projectType") ;
+	 String managerId = rs.getString("manager_id");
+	 String startDate = rs.getString("startDate");
+	 String endDate = rs.getString("endDate");
+	 
+	 // Add a row into the HTML table
+	 output += "<tr style=\"border: 1px solid black\"><td>" + projectId + "</td>";
+	 output += "<td style=\"border: 1px solid black\">" + projectName + "</td>";
+	 output += "<td style=\"border: 1px solid black\">" + projectDesc + "</td>"; 
+	 output += "<td style=\"border: 1px solid black\">" + projectType + "</td>"; 
+	 output += "<td style=\"border: 1px solid black\">" + managerId + "</td>"; 
+	 output += "<td style=\"border: 1px solid black\">" + startDate + "</td>"; 
+	 output += "<td style=\"border: 1px solid black\">" + endDate + "</td>";
+
+	 }
+	 con.close();
+	 // Complete the HTML table
+	 output += "</table>";
+	 }
+	catch (Exception e)
+	 {
+	 output = "Error while reading the items.";
 	 System.err.println(e.getMessage());
 	 e.printStackTrace();
 	 }

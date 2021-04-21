@@ -3,13 +3,13 @@
   <display-name>PafRestAPI</display-name>
   <servlet>
  <servlet-name>Jersey Web Application</servlet-name>
- <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer 
- </servlet-class>
+ <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer </servlet-class>
  <load-on-startup>1</load-on-startup>
 </servlet>
 <servlet-mapping>
  <servlet-name>Jersey Web Application</servlet-name>
  <url-pattern>/ProjectService/*</url-pattern>
+  <url-pattern>/ManagerService/*</url-pattern>
 </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

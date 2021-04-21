@@ -85,6 +85,15 @@ public class ProjectService {
 			return output;
 			
 		}
+		// Read Project Data
+		@GET
+		@Path("/")
+		@Produces(MediaType.TEXT_HTML)
+		
+		public String readItems() {
+
+			return projectObj.readProject();
+		}
 	
 		}
 
