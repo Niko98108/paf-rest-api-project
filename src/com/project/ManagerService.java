@@ -38,7 +38,7 @@ public class ManagerService {
 				String managerName = itemObject.get("managerName").getAsString();
 				String email= itemObject.get("email").getAsString();
 				String managerType = itemObject.get("managerType").getAsString();
-				String phoneNo = itemObject.get("phoneNo").getAsString();
+				int phoneNo = itemObject.get("phoneNo").getAsInt();
 				
 				{ 
 				 String output = managerObj.insertManager(managerName, email, managerType, phoneNo); 
@@ -46,4 +46,26 @@ public class ManagerService {
 				}
 		
 		}
+		//Update Project Manager data
+				@PUT
+				@Path("/")
+				@Consumes(MediaType.APPLICATION_JSON)
+				@Produces(MediaType.TEXT_PLAIN)
+				
+				public String updateProjectManager(String managerData) {
+					//convert the input string to a JSON object
+					JsonObject projectObject = new JsonParser().parse(managerData).getAsJsonObject();
+					
+					//Read the values from the JSON object
+					int managerId = projectObject.get("managerId").getAsInt();
+					String managerName = projectObject.get("managerName").getAsString();
+					String email = projectObject.get("email").getAsString();
+					String managerType= projectObject.get("managerType").getAsString();
+					int mobile= projectObject.get("mobile").getAsInt();
+			
+					
+					String output = managerObj.updateProjectManager(managerId, managerName, email, managerType, mobile);
+					return output;
+					
+				}
 }

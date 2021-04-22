@@ -30,16 +30,16 @@ public class ProjectService {
 		
 		public String insertProject(String projectData) {
 				//convert the input string to a JSON object
-				JsonObject itemObject = new JsonParser().parse(projectData).getAsJsonObject();
+				JsonObject projectObject = new JsonParser().parse(projectData).getAsJsonObject();
 				
 				//Read the values from the JSON object
 				
-				String projectName = itemObject.get("projectName").getAsString();
-				String projectDesc= itemObject.get("projectDesc").getAsString();
-				String projectType= itemObject.get("projectType").getAsString();
-				String managerId = itemObject.get("managerId").getAsString();
-				String startDate = itemObject.get("startDate").getAsString();
-				String endDate = itemObject.get("endDate").getAsString();
+				String projectName = projectObject.get("projectName").getAsString();
+				String projectDesc= projectObject.get("projectDesc").getAsString();
+				String projectType= projectObject.get("projectType").getAsString();
+				String managerId = projectObject.get("managerId").getAsString();
+				String startDate = projectObject.get("startDate").getAsString();
+				String endDate = projectObject.get("endDate").getAsString();
 			
 				
 				String output = projectObj.insertProject(projectName, projectDesc, projectType, managerId, startDate, endDate) ;
@@ -53,16 +53,16 @@ public class ProjectService {
 		
 		public String updateProject(String projectData) {
 			//convert the input string to a JSON object
-			JsonObject itemObject = new JsonParser().parse(projectData).getAsJsonObject();
+			JsonObject projectObject = new JsonParser().parse(projectData).getAsJsonObject();
 			
 			//Read the values from the JSON object
-			String projectId = itemObject.get("projectId").getAsString();
-			String projectName = itemObject.get("projectName").getAsString();
-			String projectDesc= itemObject.get("projectDesc").getAsString();
-			String projectType= itemObject.get("projectType").getAsString();
-			String managerId = itemObject.get("managerId").getAsString();
-			String startDate = itemObject.get("startDate").getAsString();
-			String endDate = itemObject.get("endDate").getAsString();
+			String projectId = projectObject.get("projectId").getAsString();
+			String projectName = projectObject.get("projectName").getAsString();
+			String projectDesc= projectObject.get("projectDesc").getAsString();
+			String projectType= projectObject.get("projectType").getAsString();
+			String managerId = projectObject.get("managerId").getAsString();
+			String startDate = projectObject.get("startDate").getAsString();
+			String endDate = projectObject.get("endDate").getAsString();
 			
 			String output = projectObj.updateProject(projectId, projectName, projectDesc, projectType, managerId, startDate, endDate) ;
 			return output;
@@ -75,11 +75,11 @@ public class ProjectService {
 		@Consumes(MediaType.APPLICATION_XML)
 		@Produces(MediaType.TEXT_PLAIN)
 		
-		public String deleteItems(String projectData) {
+		public String deleteProject(String projectData) {
 			//convert the input string to an XML document
 			Document doc = Jsoup.parse(projectData,"",Parser.xmlParser());
 			
-			//Read the value from the element <itemID>
+			//Read the value from the element <Project>
 			String projectId = doc.select("projectId").text();
 			
 			String output = projectObj.deleteProject(projectId);
@@ -87,12 +87,13 @@ public class ProjectService {
 			return output;
 			
 		}
+		
 		// Read Project Data
 		@GET
-		@Path("/")
+		@Path("/view")
 		@Produces(MediaType.TEXT_HTML)
 		
-		public String readItems() {
+		public String readProject() {
 
 			return projectObj.readProject();
 		}

@@ -26,7 +26,7 @@ public class Manager {
 
 		 return con;
 	}
-	public String insertManager(String managerName, String email,String managerType, String phoneNo)
+	public String insertManager(String managerName, String email,String managerType, int phoneNo)
 	{
 	 String output = "";
 	try
@@ -34,7 +34,7 @@ public class Manager {
 	 Connection con = getconnection();
 	 if (con == null)
 	 {
-	 return "Error while connecting to the database";
+	 return "check your database connection";
 	 }
 	 // create a prepared statement
 	 String query = " INSERT INTO paf_rest_api.projectmanager(`manager_id`,`managerName`,`email`,`managerType`,`mobile`)"
@@ -45,7 +45,7 @@ public class Manager {
 	 preparedStmt.setString(2, managerName);
 	 preparedStmt.setString(3, email);
 	 preparedStmt.setString(4, managerType);
-	 preparedStmt.setString(5,phoneNo);// preparedStmt.setDouble(4, Double.parseDouble(price));
+	 preparedStmt.setInt(5,phoneNo);
 	
 	
 	//execute the statement
@@ -62,8 +62,8 @@ public class Manager {
 	return output;
 	}
 	
-	//update Project data function
-	public String updateProject(String projectId,String projectName, String projectDesc,String projectType, String managerId, String startDate,String endDate)
+	//update ProjectManager data function
+	public String updateProjectManager(int managerId,String managerName, String email,String managerType, int mobile)
 	{
 	 String output = "";
 	try
@@ -71,29 +71,29 @@ public class Manager {
 	 Connection con = getconnection();
 	 if (con == null)
 	 {
-	 return "Error while connecting to the database";
+	 return "check your database connection";
 	 }
 	 // create a prepared statement
-	 String query = "UPDATE project SET  projectName=?,  projectDesc=?, projectType=?, manager_id=?, startDate=? ,endDate=? WHERE project_id='"+projectId+"' ";
+	 String query = "UPDATE projectmanager SET  managerName=?,  email=?, managerType=?, mobile=? WHERE projectmanager.manager_id='"+managerId+"' ";
 	 PreparedStatement preparedStmt = con.prepareStatement(query);
 	 // binding values
 	 
-	 preparedStmt.setString(1, projectName);
-	 preparedStmt.setString(2, projectDesc);
-	 preparedStmt.setString(3, projectType);
-	 preparedStmt.setInt(4, Integer.parseInt(managerId));
-	 preparedStmt.setString(5, startDate);
-	 preparedStmt.setString(6, endDate); 
+	 preparedStmt.setString(1, managerName);
+	 preparedStmt.setString(2, email);
+	 preparedStmt.setString(3, managerType);
+	 preparedStmt.setInt(4,mobile );
+
+	
 	
 	 
 	//execute the statement
 	 preparedStmt.execute();
 	 con.close();
-	 output = "Successfully Updated Project Table";
+	 output = "Successfully Updated Project Manager Table";
 	 }
 	catch (Exception e)
 	 {
-	 output = "Error while updating";
+	 output = "Error while updating Project Manager Table";
 //	 System.err.println(e.getMessage());
 	 e.printStackTrace();
 	 }

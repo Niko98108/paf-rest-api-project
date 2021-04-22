@@ -164,9 +164,9 @@ public class Project {
 //	 + "<th>Item Description</th>"
 //	 + "<th>Update</th><th>Remove</th></tr>";
 	 
-	 output = "<table style=\"border-collapse: collapse;border: 1px solid black\">\r\n"
+	 output = "<table style=\"border-collapse: collapse;border: 1px solid black;width:100%\">\r\n"
 	 		+ "  <thead>\r\n"
-	 		+ "    <tr style=\"border: 1px solid black;background-color: lightgray\">\r\n"
+	 		+ "    <tr style=\"border: 1px solid black; background-color: #D5DCF8;\">\r\n"
 	 		+ "      <th style=\"border: 1px solid black\" scope=\"col\">Project ID</th>\r\n"
 	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Name</th>\r\n"
 	 		+ "      <th style=\"border: 1px solid black\"scope=\"col\">Project Descripton</th>\r\n"
@@ -177,6 +177,10 @@ public class Project {
 	 		+ "    </tr>\r\n"
 	 		+ "  </thead>\r\n"
 	 		+ "</table";
+	 
+	 
+	
+	 
 	 
 	 String query = "SELECT * FROM project";
 	 
@@ -195,6 +199,7 @@ public class Project {
 	 String endDate = rs.getString("endDate");
 	 
 	 // Add a row into the HTML table
+	
 	 output += "<tr style=\"border: 1px solid black\"><td>" + projectId + "</td>";
 	 output += "<td style=\"border: 1px solid black\">" + projectName + "</td>";
 	 output += "<td style=\"border: 1px solid black\">" + projectDesc + "</td>"; 
