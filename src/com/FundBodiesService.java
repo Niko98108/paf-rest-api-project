@@ -32,9 +32,9 @@ public class FundBodiesService
 	public String insertFundBodies(@FormParam("FundBodiesName") String FundBodiesName,
 	@FormParam("FundBodiesAddress") String FundBodiesAddress,
 	@FormParam("FundBodiesPhoneNo") String FundBodiesPhoneNo,
-	@FormParam("Amount") String Amount)
+	@FormParam("FundBodyValue") String FundBodyValue)
 	{
-	String output =fundbodiesObj.insertFundBodies(FundBodiesName, FundBodiesAddress, FundBodiesPhoneNo, Amount );
+	String output =fundbodiesObj.insertFundBodies(FundBodiesName, FundBodiesAddress, FundBodiesPhoneNo, FundBodyValue );
 	return output;
 	}
 	@PUT
@@ -51,8 +51,8 @@ public class FundBodiesService
 		String FundBodiesName = FundBodiesObject.get("FundBodiesName").getAsString();
 		String FundBodiesAddress = FundBodiesObject.get("FundBodiesAddress").getAsString();
 		String FundBodiesPhoneNo = FundBodiesObject.get("FundBodiesPhoneNo").getAsString();
-		String Amount = FundBodiesObject.get("Amount").getAsString();
-		String output = fundbodiesObj.updateFundBodies(FundBodiesID , FundBodiesName, FundBodiesAddress, FundBodiesPhoneNo, Amount);
+		String FundBodyValue = FundBodiesObject.get("FundBodyValue").getAsString();
+		String output = fundbodiesObj.updateFundBodies(FundBodiesID , FundBodiesName, FundBodiesAddress, FundBodiesPhoneNo, FundBodyValue);
 		return output;
 	}
 	@DELETE
