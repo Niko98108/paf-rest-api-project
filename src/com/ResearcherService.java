@@ -56,7 +56,20 @@ public class ResearcherService {
 	return output;
 	}
 
-	
+	@DELETE
+	@Path("/delete")
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteresearcher(String researcherData)
+	{
+	//Convert the input string to an XML document
+	 Document doc = Jsoup.parse(researcherData, "", Parser.xmlParser());
+
+	//Read the value from the element <itemID>
+	 String R__id = doc.select("R__id").text();
+	 String output = researcherObj.deleteresearcher(R__id); 
+	 return output;
+	}
 
 
 
