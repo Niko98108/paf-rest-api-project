@@ -94,7 +94,40 @@ public class Researcher {
 		 return output;
 		 }
 		
+		public String updateresearcher(String r_id,String name, String email, String address, String phone_number)
 		
+		{
+			 String output = "";
+			 try
+			 {
+			 Connection con = connect();
+			 if (con == null)
+			 {return "Error while connecting to the database for updating."; }
+			 // create a prepared statement
+			 String query = "UPDATE researcher SET Name=?,Email=?,Address=?,Phone_number=? WHERE R__id= ? ";
+			 PreparedStatement preparedStmt = con.prepareStatement(query);
+			 // binding values
+			 preparedStmt.setString(1, name);
+			 preparedStmt.setString(2, email);
+			 preparedStmt.setString(3, address);
+			 preparedStmt.setString(4, phone_number);
+			 preparedStmt.setInt(5, Integer.parseInt(r_id));
+			 // execute the statement
+			 preparedStmt.execute();
+			 con.close();
+			 output = "Updated successfully";
+			 }
+			 catch (Exception e)
+			 {
+			 output = "Error while updating the item.";
+			 System.err.println(e.getMessage());
+			 e.printStackTrace();
+			 }
+			 return output;
+			 }
+		
+			
+	
 	
 
 }

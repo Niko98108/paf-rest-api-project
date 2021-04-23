@@ -38,7 +38,26 @@ public class ResearcherService {
 	return output;
 	}
 	
+	@PUT
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String updateresearcher(String researcherData)
+	{
+	//Convert the input string to a JSON object
+	 JsonObject researcherObject = new JsonParser().parse(researcherData).getAsJsonObject();
+	//Read the values from the JSON object
+	 String R__id = researcherObject.get("R__id").getAsString();
+	 String Name = researcherObject.get("Name").getAsString();
+	 String Email = researcherObject.get("Email").getAsString();
+	 String Address =researcherObject.get("Address").getAsString();
+	 String Phone_number = researcherObject.get("Phone_number").getAsString();
+	 String output = researcherObj.updateresearcher(R__id, Name,Email,Address, Phone_number);
+	return output;
+	}
+
 	
+
 
 
 }
